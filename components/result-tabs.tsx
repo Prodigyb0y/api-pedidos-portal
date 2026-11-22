@@ -1,28 +1,10 @@
 "use client";
-import { useState } from "react";
 import { Tabs } from "@base-ui/react/tabs";
-import { Braces, Copy, Terminal } from "lucide-react";
+import { Braces, Terminal } from "lucide-react";
 import { fields, type Order } from "@/lib/order-contract";
+import { displayField } from "@/lib/display-field";
+import { CopyText } from "./copy-text";
 const names = ["Campos", "E-mail", "JSON", "Chamada"];
-function CopyText({ text }: { text: string }) {
-  const [status, setStatus] = useState("Copiar");
-  return (
-    <button
-      className="btn copy"
-      onClick={async () => {
-        try {
-          await navigator.clipboard.writeText(text);
-          setStatus("Copiado");
-        } catch {
-          setStatus("Selecione o texto para copiar");
-        }
-      }}
-    >
-      <Copy size={13} />
-      <span role="status">{status}</span>
-    </button>
-  );
-}
 export function ResultTabs({
   result,
   call,
@@ -64,7 +46,11 @@ export function ResultTabs({
         </p>
       )}
       <Tabs.Root defaultValue="Campos">
-        <Tabs.List className="console-tabs" aria-label="Resultado do pedido">
+        <Tabs.List
+          activateOnFocus
+          className="console-tabs"
+          aria-label="Resultado do pedido"
+        >
           {names.map((name) => (
             <Tabs.Tab key={name} value={name}>
               {name}
@@ -103,7 +89,7 @@ export function ResultTabs({
                   <div key={k}>
                     <dt>{fields[k]}</dt>
                     <dd>
-                      {result.dados[k] ?? "Não informado"}
+                      {displayField(k, result.dados[k], result.dados.moeda)}
                       {result.faltantes.some((f) => f === k) && (
                         <small>Pendente</small>
                       )}

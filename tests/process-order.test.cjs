@@ -148,3 +148,15 @@ test("timeout informa resultado incerto sem repetir", async (t) => {
   assert.match(await r.text(), /pode ter sido processado/);
   assert.equal(requests.length, 1);
 });
+
+test("apresentação formata moeda e data sem alterar valores ausentes", () => {
+  const { displayField } = require("../lib/display-field.ts");
+  assert.equal(
+    displayField("valor_unitario", 18.5, "BRL").replace(/\s/g, " "),
+    "R$ 18,50",
+  );
+  assert.equal(displayField("valor_unitario", 18.5, "XYZ"), "18,50 XYZ");
+  assert.equal(displayField("valor_unitario", 18.5, null), 18.5);
+  assert.equal(displayField("valor_unitario", null, "BRL"), "Não informado");
+  assert.equal(displayField("prazo_entrega", "2026-12-15", null), "15/12/2026");
+});

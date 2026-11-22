@@ -120,9 +120,21 @@ export function OrderConsole({ enabled }: { enabled: boolean }) {
           />
           <div className="counter" id="text-guide">
             <span>Mínimo de 10 caracteres</span>
-            <span>{text.length} / 1.000</span>
+            <span aria-live="polite" aria-atomic="true">
+              {text.length} / 1.000
+            </span>
           </div>
+          <p id="send-help" className="send-help">
+            {!enabled
+              ? "Envio indisponível: demonstração sem credencial."
+              : busy
+                ? "Aguarde a resposta antes de enviar outro pedido."
+                : !valid
+                  ? "Para enviar, escreva ao menos 10 caracteres, sem contar espaços nas extremidades."
+                  : ""}
+          </p>
           <button
+            aria-describedby="send-help"
             className="btn submit"
             disabled={!enabled || busy || !valid}
             onClick={submit}
