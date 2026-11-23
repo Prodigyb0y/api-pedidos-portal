@@ -29,7 +29,7 @@ Next.js, TypeScript e Tailwind CSS, gerados no v0 (Vercel) e publicados na Verce
 
 Variáveis de ambiente: DEMO_API_KEY (segredo da chave demo da API, nunca versionado) e, opcionalmente, API_BASE_URL (padrão: a API publicada).
 
-Comandos: pnpm install, depois pnpm dev. Testes: npm test (15 testes de contrato da rota /api/demo/processar, com rede simulada, sem chamar a API real).
+Comandos: pnpm install, depois pnpm dev. Testes: npm test (16 testes de contrato da rota /api/demo/processar, com rede simulada, sem chamar a API real).
 
 ## Limitações
 

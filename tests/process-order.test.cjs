@@ -107,11 +107,12 @@ for (const [status, code] of [
   [422, "pedido_sem_item"],
   [429, "limite_diario"],
   [503, "teto_de_gasto"],
-  [503, "sem_configuracao"],
-  [502, "falha_modelo"],
-  [401, "sem_chave"],
+  [503, "api_nao_configurada"],
+  [503, "provedor_nao_configurado"],
+  [502, "falha_provedor"],
+  [401, "chave_ausente"],
   [403, "chave_invalida"],
-  [500, "inesperado"],
+  [500, "erro_interno"],
 ])
   test(`erro ${status} ${code}: sem vazamento ou repetição`, async () => {
     reply = () =>
